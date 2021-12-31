@@ -1,0 +1,17 @@
+:root {
+  }
+
+#main{
+    display: flex;
+    flex-flow: row wrap;
+    width: var(--dim);
+    height: var(--dim);
+}
+
+#main div{
+    width: var(--divDim);
+    height: var(--divDim);
+    border: solid red;
+    flex: 1;
+    gap: 0;
+}
