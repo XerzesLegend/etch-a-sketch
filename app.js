@@ -1,5 +1,5 @@
 let setSize = 16;
-const size = 600;
+let size = 600;
 
 n = (setSize)**2;
 divs = [];
@@ -12,6 +12,8 @@ for(i=0; i<n; i++){
 
 
 let r = document.querySelector(':root');
+size = String(size) + "px";
 let mainDim = r.style.setProperty('--dim', size);
-let dim = (600/setSize)**(0.5);
+let dim = (600/setSize);
+dim = String(dim) + "px";
 let divDim = r.style.setProperty('--divDim', dim);
