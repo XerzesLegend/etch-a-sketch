@@ -1,6 +1,11 @@
 :root {
   }
 
+.container{
+  display: flex;
+  justify-content: space-between;
+}
+
 #main{
     width: var(--dim);
     height: var(--dim);
@@ -14,6 +19,13 @@
     height: var(--divDim);
     font-size: 0;
     }
-#main div:hover{
-  background-color: black;
+
+
+
+.btnActive{
+  background-color: grey;
+}
+
+.squareHover{
+  background-color: var(--color);
 }
