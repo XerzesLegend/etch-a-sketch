@@ -1,9 +1,17 @@
 :root {
   }
 
+body{
+  background-color: rgb(122, 120, 120);
+}
 .container{
   display: flex;
   justify-content: space-between;
+}
+
+#controls{
+  display: flex;
+  flex-flow: column;
 }
 
 #main{
@@ -12,20 +20,32 @@
     border: solid red;
     display: flex;
     flex-flow: wrap;
+    background-color: white;
 }
 
 #main div{
     width: var(--divDim);
     height: var(--divDim);
     font-size: 0;
+
     }
 
-
-
-.btnActive{
-  background-color: grey;
+.squareRbgHover{
+  background-color: var(--color);
 }
 
-.squareHover{
-  background-color: var(--color);
+button{
+  padding: 16px;
+  margin: 16px;
+  border-radius: 10px;
+  width: 150px;
+  transition: all 0.1s;
+  font-weight: 900;
+  border: solid red;
+}
+
+.btn-trans{
+  scale: 1.05;
+  background-color: black;
+  color: white;
 }

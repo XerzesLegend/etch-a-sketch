@@ -1,4 +1,4 @@
-let setSize = 16; //Dimension for the squares in the grid, in this case it is 16x16
+let setSize = 1; //Dimension for the squares in the grid, in this case it is 1x1
 let size = 600; //Fixed dimension of the grid (600x600)
 n = (setSize)**2; 
 let divs = [];
@@ -14,15 +14,7 @@ let divDim = r.style.setProperty('--divDim', dim);
 controlsContainer = document.querySelector('#controls');
 container = document.querySelector('#main');
 
-//For loop for adding all the divs
-for(i=0; i<n; i++){
-    let div = document.createElement('div');
-    div.addEventListener('mouseover', function(e){
-        div.classList.add('squareHover');
-    });
-    container.append(div);
-    divs.push(div);
-}
+
 
 //Create button elements
 
@@ -32,16 +24,16 @@ const clearButton = document.createElement('button');
 
 //Initialize selection
 
-blackButton.classList.add('btnActive');
-color = "black";
-let globalColor = r.style.setProperty('--color', color);
+blackButton.style.cssText = "background-color: black; color: white;"
+let cond = true;
 
 //Black button
 
 blackButton.addEventListener('click', function(e){
-    this.classList.add('btnActive');
-    rainbowButton.classList.remove('btnActive');
-    globalColor = r.style.setProperty('--color', "black");
+    this.style.cssText = "background-color: black; color: white;";
+    this.classList.add('btn-trans');
+    rainbowButton.style.cssText = "background-color: white; color: black;";
+    cond = true;
 });
 blackButton.textContent = "Black mode";
 ////////////////////////////////////////////////////////////
@@ -49,9 +41,10 @@ blackButton.textContent = "Black mode";
 //Rainbow button
 
 rainbowButton.addEventListener('click', function(e){
-    this.classList.add('btnActive');
-    blackButton.classList.remove('btnActive');
-    globalColor = r.style.setProperty('--color', randomRGB());
+    this.style.cssText = "background-color: black; color: white;";
+    this.classList.add('btn-trans');
+    blackButton.style.cssText = "background-color: white; color: black;";
+    cond = false; 
 });
 rainbowButton.textContent = "Rainbow mode";
 ////////////////////////////////////////////////////////////
@@ -59,19 +52,20 @@ rainbowButton.textContent = "Rainbow mode";
 //Clear button
 
 clearButton.addEventListener('click', function(e){
+    this.style.cssText = "background-color: white; color: black;";
     createSquares(askForSize(divDim, size), container);
-    divs.forEach(div => div.classList.remove('squareHover'))
+    divs.forEach(div => div.style.removeProperty('background-color'));
 });
 clearButton.textContent = "Clear";
 ////////////////////////////////////////////////////////////
-
-
+btns = [blackButton, rainbowButton];
+btns.forEach(btn => btn.addEventListener('transitionend', removeTransition));
 
 
 controlsContainer.append(blackButton);
 controlsContainer.append(rainbowButton);
 controlsContainer.append(clearButton);
-
+createSquares(askForSize(divDim, size), container);
 
 
 
@@ -91,7 +85,14 @@ function createSquares(size, container){
     for(i=0; i<size; i++){
         let div = document.createElement('div');
         div.addEventListener('mouseover', function(e){
-            div.classList.add('squareHover');
+            if(cond){
+                div.style.backgroundColor = "black";
+            }
+            else{
+                let color =  randomRGB();
+                div.style.backgroundColor = color;
+            }
+            
         });
         container.append(div);
         divs.push(div);
@@ -100,7 +101,7 @@ function createSquares(size, container){
 }
 
 function askForSize(divDim, size){
-    let answer = prompt("Select a size between 1 and 100");
+    let answer = prompt("How big do you want your canvas to be? (Select a size between 1 and 100)");
     if(answer>100){
         answer = 100;
     }
@@ -119,4 +120,10 @@ function randomRGB(){
     let r = Math.round, k = Math.random, s = 255;
     rgbColor = "rgb(" + String(r(k()*s)) + ", " + String(r(k()*s)) + ", " + String(r(k()*s)) + ')';
     return rgbColor
+}
+
+function removeTransition(e){
+    if(e.propertyName !== "scale") return
+
+    this.classList.remove('btn-trans');
 }
