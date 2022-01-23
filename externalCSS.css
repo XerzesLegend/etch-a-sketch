@@ -1,0 +1,43 @@
+/*Credit to deathangel908 on stackoverflow
+https://stackoverflow.com/questions/18389224/how-to-style-html5-range-input-to-have-different-color-before-and-after-slider */
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 100%;
+      -webkit-appearance: none;
+      background-color: rgb(122, 120, 120);
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: rgb(226, 69, 69);
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: rgb(122, 120, 120);
+      box-shadow: -80px 0 0 80px rgb(226, 69, 69);
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: rgb(226, 69, 69); 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: rgb(226, 69, 69); 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}

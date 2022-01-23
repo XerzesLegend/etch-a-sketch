@@ -3,11 +3,13 @@
 
 body{
   background-color: rgb(122, 120, 120);
+  font-family: 'Mochiy Pop P One', sans-serif;
 }
+
 .container{
   display: flex;
   justify-content: center;
-  gap: 10%;
+  gap: 20%;
 }
 
 #controls{
@@ -18,7 +20,7 @@ body{
 #main{
     width: var(--dim);
     height: var(--dim);
-    border: solid red;
+    border: solid rgb(226, 69, 69);
     display: flex;
     flex-flow: wrap;
     background-color: white;
@@ -42,11 +44,20 @@ button{
   width: 150px;
   transition: all 0.1s;
   font-weight: 900;
-  border: solid red;
+  border: solid rgb(226, 69, 69);
 }
 
 .btn-trans{
   scale: 1.05;
   background-color: black;
   color: white;
+}
+
+#sliderValue{
+  text-align: center;
+  font-weight: 900;
+}
+
+h1{
+  text-align: center;
 }

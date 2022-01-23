@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch A Sketch</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="externalCSS.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet"> 
 </head>
 <body>
+    <h1>Etch-a-Sketch</h1>
     <div class="container">
         <div id="controls">
-            <h1>Etch-a-Sketch</h1>
+            <input type="range" min="1" max="100" value="50" name="selectSize" id="selectSize">
+            <div id="sliderValue"></div>
         </div>
         <div id="main"></div>
     </div>

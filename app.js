@@ -53,7 +53,7 @@ rainbowButton.textContent = "Rainbow mode";
 
 clearButton.addEventListener('click', function(e){
     this.style.cssText = "background-color: white; color: black;";
-    createSquares(askForSize(divDim, size), container);
+    createSquares(changeSize(divDim, size), container);
     divs.forEach(div => div.style.removeProperty('background-color'));
 });
 clearButton.textContent = "Clear";
@@ -61,14 +61,19 @@ clearButton.textContent = "Clear";
 btns = [blackButton, rainbowButton];
 btns.forEach(btn => btn.addEventListener('transitionend', removeTransition));
 
-
-controlsContainer.append(blackButton);
-controlsContainer.append(rainbowButton);
-controlsContainer.append(clearButton);
-createSquares(askForSize(divDim, size), container);
+controlsContainer.prepend(clearButton);
+controlsContainer.prepend(rainbowButton);
+controlsContainer.prepend(blackButton);
 
 
+createSquares(changeSize(divDim, size), container);
 
+//When slider changes value, we reset
+const slider = document.querySelector('#selectSize');
+slider.addEventListener('change', function(){
+    createSquares(changeSize(divDim, size), container)
+});
+sliderDisplay();
 
 //Functions
 
@@ -100,22 +105,6 @@ function createSquares(size, container){
     return divs
 }
 
-function askForSize(divDim, size){
-    let answer = prompt("How big do you want your canvas to be? (Select a size between 1 and 100)");
-    if(answer>100){
-        answer = 100;
-    }
-    else if(answer<1){
-        answer = 1;
-    }
-    let ans = answer;
-    answer = (size/answer);
-    answer = String(answer) + "px";
-    divDim = r.style.setProperty('--divDim', answer);
-    return ans
-}
-
-
 function randomRGB(){
     let r = Math.round, k = Math.random, s = 255;
     rgbColor = "rgb(" + String(r(k()*s)) + ", " + String(r(k()*s)) + ", " + String(r(k()*s)) + ')';
@@ -126,4 +115,23 @@ function removeTransition(e){
     if(e.propertyName !== "scale") return
 
     this.classList.remove('btn-trans');
+}
+
+function changeSize(divDim, size){
+    const slider = document.querySelector('#selectSize');
+    let answer = slider.value;
+    let ans = answer;
+    answer = (size/answer);
+    answer = String(answer) + "px";
+    divDim = r.style.setProperty('--divDim', answer);
+    return ans
+}
+
+function sliderDisplay(){
+    let sliderValue = document.querySelector('#sliderValue');
+    const slider = document.querySelector('#selectSize');
+    sliderValue.textContent = slider.value + 'x' + slider.value; 
+    slider.addEventListener('input', function(){
+        sliderValue.textContent = slider.value + 'x' + slider.value; 
+    });
 }
